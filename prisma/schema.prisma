@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Doctor {
+  id             String   @id @default(uuid())
+  firstName      String
+  lastName       String
+  mobileNumber   BigInt   @unique
+  email          String   @unique
+  age            Int
+  gender         String
+  dob            DateTime
+  specialization String
+  imageUrl       String?
+  createdAt      DateTime @default(now())
+}
+
+model Patient {
+  id                           String                         @id @default(uuid())
+  firstName                    String
+  lastName                     String
+  aadharNumber                 BigInt                         @unique
+  mobileNumber                 BigInt                         @unique
+  age                          Int
+  gender                       String
+  maritalStatus                String
+  bloodGroup                   String
+  dob                          DateTime
+  address                      String
+  uniqueCode                   String                         @unique
+  createdAt                    DateTime                       @default(now())
+  PatientAdditionalInfoPatient PatientAdditionalInfoPatient[]
+}
+
+model PatientAdditionalInfo {
+  id                           String                         @id @default(uuid())
+  date                         DateTime                       @default(now())
+  doctorName                   String
+  disease                      String
+  medicine                     String
+  treatment                    String
+  PatientAdditionalInfoPatient PatientAdditionalInfoPatient[]
+}
+
+model PatientAdditionalInfoPatient {
+  patientId String
+  patient   Patient               @relation(fields: [patientId], references: [id])
+  infoId    String
+  info      PatientAdditionalInfo @relation(fields: [infoId], references: [id])
+
+  @@id([patientId, infoId])
+}
+
+model Log {
+  id        Int      @id @default(autoincrement())
+  userId    String?
+  role      String?
+  action    String
+  timestamp DateTime @default(now())
+  notes     String?
+}

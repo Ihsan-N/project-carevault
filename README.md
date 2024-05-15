@@ -1,3 +1,4 @@
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -19,6 +20,31 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Environment Variables
+
+Create a `.env` file in the root directory of your project and add the following details:
+
+```dotenv
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your-clerk-publishable-key
+CLERK_SECRET_KEY=your-clerk-secret-key
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in 
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+DATABASE_URL=your-database-url
+
+UPLOADTHING_SECRET=your-uploadthing-secret-key
+UPLOADTHING_APP_ID=your-uploadthing-app-id
+```
+
+Replace the placeholder values with your actual configuration details from the respective services:
+
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` from [Clerk](https://clerk.com/)
+- `DATABASE_URL` from your database provider (e.g., [Supabase](https://supabase.com/))
+- `UPLOADTHING_SECRET` and `UPLOADTHING_APP_ID` from [UploadThing](https://uploadthing.com/)
 
 ## Learn More
 
